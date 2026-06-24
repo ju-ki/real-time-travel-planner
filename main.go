@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+	"real-time-travel-planner/app/models"
 	"real-time-travel-planner/config"
 	"real-time-travel-planner/utils"
 	"regexp"
@@ -52,7 +53,8 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	utils.LoggingSettings(config.AppConfig.LogFile)
-	log.Println("Starting server on :8080")
-	// http.HandleFunc("/view/", viewHandler)
-	// log.Fatal(http.ListenAndServe(":8080", nil))
+	_ = models.DbConnection
+	http.HandleFunc("/view/", viewHandler)
+	http.ListenAndServe(fmt.Sprintf(":%d", config.AppConfig.Port), nil)
+
 }

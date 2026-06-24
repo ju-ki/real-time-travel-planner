@@ -8,7 +8,10 @@ import (
 )
 
 type Config struct {
-	LogFile string
+	LogFile   string
+	DbName    string
+	SQLDriver string
+	Port      int
 }
 
 var AppConfig Config
@@ -27,5 +30,8 @@ func init() {
 	}
 
 	AppConfig.LogFile = cfg.Section("realTimeTravelPlanner").Key("logFile").String()
+	AppConfig.DbName = cfg.Section("db").Key("name").String()
+	AppConfig.SQLDriver = cfg.Section("db").Key("driver").String()
+	AppConfig.Port = cfg.Section("web").Key("port").MustInt()
 
 }

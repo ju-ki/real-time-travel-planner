@@ -34,7 +34,7 @@
 
 ## データベース
 
-* PostgreSQL
+* sqlite
 
 ---
 
